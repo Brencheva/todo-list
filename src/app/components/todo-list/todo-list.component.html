@@ -1,1 +1,39 @@
-<p>todo-list works!</p>
+<mat-card>
+    <mat-card-title>What are your plans for today?</mat-card-title>
+
+    <mat-card-content>
+        <ol>
+            <li *ngFor="let todler of todlers">
+                <mat-form-field *ngIf="!todler.isDid">
+                    <textarea matInput
+                    matTextareaAutosize
+                    [(ngModel)]="todler.content"
+                    [readonly]="todler.isDid"></textarea>
+
+                    <button type="button"
+                    matSuffix
+                    mat-button
+                    (click)="finishTodler(todler)">✓</button>
+                </mat-form-field>
+
+                <span *ngIf="todler.isDid"
+                    class="overline-text">{{todler.content}}</span>
+                </li>
+
+                <li>
+            <mat-form-field>
+                <span class="plus-button"
+                matPrefix>+</span>
+
+                <textarea matInput
+                    matTextareaAutosize
+                    matAutosizeMinRows="1"
+                placeholder="one main thing"
+                [(ngModel)]="newTodler.content"
+                (blur)="addNewTodler()"
+                (keyup.enter)="addNewTodler()"></textarea>
+            </mat-form-field>
+            </li>
+            </ol>
+    </mat-card-content>
+</mat-card>
